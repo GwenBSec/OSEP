@@ -1,4 +1,5 @@
 ## Malicious Macro (.doc, .docm)
+Macro invoking PowerShell to create a reverse shell
 
 ```
 Sub AutoOpen()
