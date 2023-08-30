@@ -1,4 +1,5 @@
 //powershell script for in-memory shellcocde runner 
+//we can use PS runner.vba to download & execute this script 
 
 function LookupFunc {
 
