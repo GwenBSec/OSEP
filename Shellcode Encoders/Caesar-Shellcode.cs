@@ -16,13 +16,13 @@ namespace Helper
                 encoded[i] = (byte)(((uint)buf[i] + 2) & 0xFF);
             }
             
-						StringBuilder hex = new StringBuilder(encoded.Length * 2);
-						foreach(byte b in encoded)
-						{
-						    hex.AppendFormat("0x{0:x2}, ", b);
-						}
+	    StringBuilder hex = new StringBuilder(encoded.Length * 2);
+	    foreach(byte b in encoded)
+	    {
+	    	hex.AppendFormat("0x{0:x2}, ", b);
+	    }
 			
-						Console.WriteLine("The payload is: " + hex.ToString());
-				}
-		}
+	    Console.WriteLine("The payload is: " + hex.ToString());
+	}
+    }
 }
