@@ -1,5 +1,7 @@
 //XOR shellcode encoder 
 //encrypt payload & add decryptor 
+//full credit goes to gh0x0st 
+
 
 using System;
 using System.Collections.Generic;
