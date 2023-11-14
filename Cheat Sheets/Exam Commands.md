@@ -97,7 +97,7 @@ Get-DomainUser -Identity harry.jones -Domain inlanefreight.local | Select-Object
 
 Get-DomainGroup | select name 
 Get-DomainGroup -UserName "ella"
-Get-DomainGroup -Identity "Domain Admins"
+Get-DomainGroup -Identity "Domain Admins" -Recurse
 Get-DomainGroupMember -Identity "Domain Admins" | select MemberName 
 Get-DomainManagedSecurityGroup
 Find-ManagedSecurityGroups | select GroupName
