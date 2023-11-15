@@ -94,6 +94,7 @@ Get-DomainUser
 Get-DomainUser | select cn,samaccountname 
 Get-DomainUser -Identity "ted"
 Get-DomainUser -Identity harry.jones -Domain inlanefreight.local | Select-Object -Property name,samaccountname,description,memberof,admincount,userprincipalname,serviceprincipalname,useraccountcontrol
+Get-DomainUser * |select samaccountname,description | ?{$_.Description -ne $null}
 
 Get-DomainGroup | select name 
 Get-DomainGroup -UserName "ella"
