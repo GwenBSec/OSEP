@@ -119,13 +119,13 @@ Test-AdminAccess -ComputerName SQL01
 
 #### BloodHound
 ```
-SharpHound.exe -c all --domain core-jijistudios.com --zipfilename out.zip
+SharpHound.exe -c all --domain domain.com --zipfilename out.zip
 
 .\SharpHound.ps1 
 Invoke-BloodHound -CollectionMethod All -Verbose
 
 sudo bloodhound-python -dc DC04.tricky.com -ns 172.16.170.150 --dns-tcp -d tricky.com -c All -u sqlsvc@tricky.com -p '4dfgdfFFF542' --zip 
-sudo bloodhound-python -dc dc01.jijistudio.com -ns 172.16.116.100 -d jijistudio.com -u 'web05' --hashes 'aad3b435b51404eeaad3b435b51404ee:e77541ac65a3fc493c3180041095d2dc' -c All --zip
+sudo bloodhound-python -dc dc01.domain.com -ns 172.16.116.100 -d domain.com -u 'web05' --hashes 'aad3b435b51404eeaad3b435b51404ee:e77541ac65a3fc493c3180041095d2dc' -c All --zip
 ```
 <br>
 <br>
